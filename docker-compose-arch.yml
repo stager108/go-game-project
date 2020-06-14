@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  postgres:
+    build: 
+          context: ./postgres/
+          dockerfile: Dockerfile
+    ports:
+      - '32768:32768'
+  client:
+    build: 
+          context: ./client/
+          dockerfile: Dockerfile.arch
+    ports:
+      - '8001:8001'
+  project:
+    build: 
+          context: ./project/
+          dockerfile: Dockerfile.arch
+    ports:
+      - '8000:8000'
+    depends_on:
+      - postgres
